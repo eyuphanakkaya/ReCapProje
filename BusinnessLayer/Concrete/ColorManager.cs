@@ -1,4 +1,7 @@
 ﻿using BusinnessLayer.Abstract;
+using BusinnessLayer.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttinConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccessLayer.Abstract;
 using Entities.Concrete;
@@ -20,8 +23,12 @@ namespace BusinnessLayer.Concrete
             _colorDal = colorDal;
         }
 
+
+
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
+            //ValidationTools.Validate(new ColorValidator(), color);
             _colorDal.Add(color);
             return new SuccessResult("eklendi");
         }

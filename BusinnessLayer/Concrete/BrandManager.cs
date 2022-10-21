@@ -1,4 +1,7 @@
 ﻿using BusinnessLayer.Abstract;
+using BusinnessLayer.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttinConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccessLayer.Abstract;
 using Entities.Concrete;
@@ -17,12 +20,14 @@ namespace BusinnessLayer.Concrete
 
         public BrandManager(IBrandDal brandDal)
         {
+           
             _brandDal = brandDal;
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-           _brandDal.Add(brand);
+            _brandDal.Add(brand);
             return new SuccessResult("Marka Eklendi");
         }
 

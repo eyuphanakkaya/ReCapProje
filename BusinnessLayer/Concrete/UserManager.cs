@@ -1,4 +1,7 @@
 ﻿using BusinnessLayer.Abstract;
+using BusinnessLayer.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttinConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccessLayer.Abstract;
 using Entities.Concrete;
@@ -18,9 +21,11 @@ namespace BusinnessLayer.Concrete
         {
             _usersDal = usersDal;
         }
-
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(Users users)
         {
+
+            //ValidationTools.Validate(new UserValidator(), users);
             _usersDal.Add(users);
             return new SuccessResult("Kullanıcı Eklendi");
         }

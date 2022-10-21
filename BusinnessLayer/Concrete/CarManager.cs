@@ -1,5 +1,8 @@
 ﻿using BusinnessLayer.Abstract;
 using BusinnessLayer.Constants;
+using BusinnessLayer.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttinConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFrameWork;
@@ -22,12 +25,9 @@ namespace BusinnessLayer.Concrete
             _carDal = cardal;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.CarName.Length<2)
-            {
-                return new ErrorResult(Messages.AddedError);
-            }
            _carDal.Add(car);
             return new SuccessResult(Messages.AddedSuccess);
         }

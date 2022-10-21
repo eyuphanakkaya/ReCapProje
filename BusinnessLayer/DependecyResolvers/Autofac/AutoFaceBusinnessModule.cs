@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using BusinnessLayer.Abstract;
 using BusinnessLayer.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFrameWork;
 using System;
