@@ -11,5 +11,6 @@ namespace BusinnessLayer.Constants
         public static string AddedSuccess = "Araba eklenmiştir";
         public static string AddedError = "Karakter sayısı hatası";
 
+        public static string CarPicturePieces = "En fazla 5 araba resmi olabilir";
     }
 }

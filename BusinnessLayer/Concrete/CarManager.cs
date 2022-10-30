@@ -3,6 +3,7 @@ using BusinnessLayer.Constants;
 using BusinnessLayer.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttinConcerns.Validation;
+using Core.Utilities.Businness;
 using Core.Utilities.Results;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFrameWork;
@@ -19,15 +20,18 @@ namespace BusinnessLayer.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+        ICarImageService _carImageService;
 
-        public CarManager(ICarDal cardal)
+        public CarManager(ICarDal cardal, ICarImageService carImageService)
         {
             _carDal = cardal;
+            _carImageService = carImageService;
         }
 
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+           
            _carDal.Add(car);
             return new SuccessResult(Messages.AddedSuccess);
         }
@@ -54,6 +58,7 @@ namespace BusinnessLayer.Concrete
             return new DataResult<List<Car>>(result, true, "Selamlar");
         }
 
+
         public IDataResult<Car> GetByColorId(int id)
         {
             return new SuccessDataResult<Car>(_carDal.GetById(x => x.ColorId == id), "Id getirildi");
@@ -79,5 +84,11 @@ namespace BusinnessLayer.Concrete
             _carDal.Update(car);
             return new Result(true, "Güncelleme başarılı");
         }
+
+
+
+       
+
+
     }
 }
