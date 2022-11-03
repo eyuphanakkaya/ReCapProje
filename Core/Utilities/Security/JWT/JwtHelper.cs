@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using OperationClaim = Core.Entities.Concrete.OperationClaim;
 
 namespace Core.Utilities.Security.JWT
 {
@@ -65,5 +66,7 @@ namespace Core.Utilities.Security.JWT
 
             return claims;
         }
+
+    
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,10 @@ namespace DataAccessLayer.Concrete.EntityFrameWork
         public DbSet<Brand> Tb_Brand { get; set; }
         public DbSet<Car> Tb_Car { get; set; }
         public DbSet<Color> Tb_Color { get; set; }
-        public DbSet<Users> Tb_User { get; set; }
+        //public DbSet<Users> Tb_User { get; set; }
         public DbSet<Customers> Tb_Customer { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

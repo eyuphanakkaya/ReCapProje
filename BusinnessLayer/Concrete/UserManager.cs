@@ -2,8 +2,10 @@
 using BusinnessLayer.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttinConcerns.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete.EntityFrameWork;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -22,7 +24,7 @@ namespace BusinnessLayer.Concrete
             _usersDal = usersDal;
         }
         [ValidationAspect(typeof(UserValidator))]
-        public IResult Add(Users users)
+        public IResult Add(User users)
         {
 
             //ValidationTools.Validate(new UserValidator(), users);
@@ -30,26 +32,40 @@ namespace BusinnessLayer.Concrete
             return new SuccessResult("Kullanıcı Eklendi");
         }
 
-        public IResult Delete(Users users)
+        public IResult Delete(User users)
         {
             _usersDal.Delete(users);
             return new SuccessResult("Kullanıcı Silindi");
         }
 
-        public IDataResult<List<Users>> GetAll()
+        public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<Users>>(_usersDal.GetAll());
+            return new SuccessDataResult<List<User>>(_usersDal.GetAll());
         }
 
-        public IDataResult<Users> GetByUserId(int id)
+        public IDataResult<User> GetByUserId(int id)
         {
-          return new SuccessDataResult<Users>(_usersDal.GetById(x => x.Id == id));
+          return new SuccessDataResult<User>(_usersDal.GetById(x => x.Id == id));
         }
 
-        public IResult Update(Users users)
+        public IResult Update(User users)
         {
             _usersDal.Update(users);
             return new SuccessResult("Kullanıcı Güncellendi");
+        }
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _usersDal.GetClaims(user);
+        }
+
+        public void TAdd(User user)
+        {
+            _usersDal.Add(user);
+        }
+
+        public User GetByMail(string email)
+        {
+            return _usersDal.Get(u => u.Email == email);
         }
     }
 }

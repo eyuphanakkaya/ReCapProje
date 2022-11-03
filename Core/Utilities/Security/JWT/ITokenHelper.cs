@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OperationClaim = Core.Entities.Concrete.OperationClaim;
 
 namespace Core.Utilities.Security.JWT
 {
