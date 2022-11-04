@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
             return BadRequest(carImage);
         }
         [HttpPost("add")]
-        public IActionResult Add(IFileHelper file,CarImage carImage)
+        public IActionResult Add(IFormFile file,CarImage carImage)
         {
             var carImage2 = _carImageService.Add(file,carImage);
             if (carImage2.Success)
@@ -48,9 +48,9 @@ namespace WebAPI.Controllers
             return BadRequest(carImage2);
         }
         [HttpPost("update")]
-        public IActionResult Update(CarImage carImage)
+        public IActionResult Update(IFormFile file,CarImage carImage)
         {
-            var carImage2=_carImageService.Update(carImage);
+            var carImage2=_carImageService.Update(file,carImage);
             if (carImage2.Success)
             {
                 return Ok(carImage2);

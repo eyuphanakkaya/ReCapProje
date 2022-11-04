@@ -65,7 +65,7 @@ namespace BusinnessLayer.Concrete
 
         public User GetByMail(string email)
         {
-            return _usersDal.Get(u => u.Email == email);
+            return _usersDal.GetAll(u => u.Email == email).FirstOrDefault();
         }
     }
 }

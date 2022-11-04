@@ -26,7 +26,7 @@ namespace BusinnessLayer.Concrete
             _fileHelper = fileHelper;
         }
 
-        public IResult Add(IFileHelper fileHelper,CarImage carImage)
+        public IResult Add(IFormFile file,CarImage carImage)
         {
             IResult result = BusinnessRules.Run(CheckCarPicturePieces(carImage.Id));
 
@@ -34,14 +34,15 @@ namespace BusinnessLayer.Concrete
             {
                 return result;
             }
-            carImage.ImagePath = _fileHelper.Upload(fileHelper, PathConstants.ImagesPath);
+            carImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesPath);
+            carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
-            carImage.Date=DateTime.Now;
             return new SuccessResult("Resim eklendi");
         }
 
-        public IResult Delete(IFileHelper file, CarImage carImage)
+        public IResult Delete(CarImage carImage)
         {
+            _fileHelper.Delete(PathConstants.ImagesPath + carImage.ImagePath);
             _carImageDal.Delete(carImage);
             return new SuccessResult("Resim silindi");
         }
@@ -67,9 +68,10 @@ namespace BusinnessLayer.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == id));
         }
 
-        public IResult Update(CarImage carImage)
+        public IResult Update(IFormFile file,CarImage carImage)
         {
-           _carImageDal.Update(carImage);
+            carImage.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + carImage.ImagePath, PathConstants.ImagesPath);
+            _carImageDal.Update(carImage);
             return new SuccessResult("Resim güncellendi");
         }
 
