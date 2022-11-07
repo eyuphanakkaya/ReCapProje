@@ -1,6 +1,8 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using BusinnessLayer.DependecyResolvers.Autofac;
+using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -32,5 +34,6 @@ namespace WebAPI
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        
     }
 }

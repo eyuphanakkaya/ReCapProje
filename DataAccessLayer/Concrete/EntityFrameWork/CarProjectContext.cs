@@ -21,7 +21,7 @@ namespace DataAccessLayer.Concrete.EntityFrameWork
         //public DbSet<Users> Tb_User { get; set; }
         public DbSet<Customers> Tb_Customer { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

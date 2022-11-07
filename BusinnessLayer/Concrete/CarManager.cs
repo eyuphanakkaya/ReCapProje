@@ -1,4 +1,5 @@
 ﻿using BusinnessLayer.Abstract;
+using BusinnessLayer.BusinessAspects.Autofac;
 using BusinnessLayer.Constants;
 using BusinnessLayer.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -27,7 +28,7 @@ namespace BusinnessLayer.Concrete
             _carDal = cardal;
             _carImageService = carImageService;
         }
-
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {

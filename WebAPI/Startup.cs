@@ -19,6 +19,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Core.Utilities.Security.Encryption;
+using Core.Utilities.IoC;
+using System.Net.Http;
+using Microsoft.AspNetCore.Http;
+using Core.Extensions;
+using Core.DependecyResovers;
 
 namespace WebAPI
 {
@@ -50,7 +55,7 @@ namespace WebAPI
 
             //services.AddSingleton<IUserService, UserManager>();
             //services.AddSingleton<IUsersDal, EfUserDal>();
-
+            services.AddCors();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -67,7 +72,9 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-
+            services.AddDependecyResovers(new ICoreModule[]
+                {new CoreModule() 
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -84,6 +91,9 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
+            app.UseCors(builder => builder.WithOrigins("http://localhost:44313").AllowAnyHeader());
+
+            //app.ConfigureCustomExceptionMiddleware();
 
             app.UseHttpsRedirection();
 

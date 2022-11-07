@@ -1,4 +1,5 @@
 ﻿using BusinnessLayer.Abstract;
+using BusinnessLayer.BusinessAspects.Autofac;
 using BusinnessLayer.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttinConcerns.Validation;
@@ -23,6 +24,7 @@ namespace BusinnessLayer.Concrete
         {
             _usersDal = usersDal;
         }
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User users)
         {
