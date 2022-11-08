@@ -2,6 +2,7 @@
 using BusinnessLayer.BusinessAspects.Autofac;
 using BusinnessLayer.Constants;
 using BusinnessLayer.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttinConcerns.Validation;
 using Core.Utilities.Businness;
@@ -29,6 +30,7 @@ namespace BusinnessLayer.Concrete
             _carImageService = carImageService;
         }
         //[SecuredOperation("admin")]
+        [CacheAspect]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -64,7 +66,7 @@ namespace BusinnessLayer.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.GetById(x => x.ColorId == id), "Id getirildi");
         }
-
+        [CacheAspect]
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.GetById(x=>x.Id==id));
@@ -79,7 +81,7 @@ namespace BusinnessLayer.Concrete
         {
           return new DataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),false,"İşlem başarıyla gerçekleşti");  
         }
-
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
