@@ -14,13 +14,13 @@ namespace BusinnessLayer.Constants
 
         public static string CarPicturePieces = "En fazla 5 araba resmi olabilir";
 
-        public static string AuthorizationDenied = "";
+        public static string AuthorizationDenied = "YetkilendirmeReddedildi";
 
-        public static string UserRegistered = "";
-        public static string UserNotFound = "";
-        public static string PasswordError = "";
-        public static string SuccessfulLogin = "";
-        public static string UserAlreadyExists = "";
-        public static string AccessTokenCreated = "";
+        public static string UserRegistered = "Kullanıcı Kayıtlı";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre Hatası";
+        public static string SuccessfulLogin = "Başarılı Giriş";
+        public static string UserAlreadyExists = "Kullanıcı zaten var";
+        public static string AccessTokenCreated = "Erişim Simgesi Oluşturuldu";
     }
 }
